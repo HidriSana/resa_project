@@ -4,20 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php $title ?></title>
-
+    <title><?php echo $pageTitle; ?></title>
 </head>
 
 <body>
     <header>
-        <p>Hello</p>
     </header>
+    <main>
+        <?php
+        require_once('files.php');
+        //Instanciation de la BDD
+        $database = new DbConnection("localhost", "donkey_hotel", "root", "");
 
-    <?php
-    require_once('_connec.php');
-    $database = new DbConnection("localhost", "donkey_hotel", "root", "");
-
-    // Obtention de l'instance de PDO (la connexion à la base de données)
-    $pdo = $database->getDbConnection();
-
-    var_dump($database);
+        // Instantaciation de PDO
+        $pdo = $database->getDbConnection();
