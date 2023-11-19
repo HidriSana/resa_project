@@ -24,3 +24,6 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $_SESSION['message'] = 'You need to login first';
     header('location:index.php');
 }
+
+
+require_once('footer.php');

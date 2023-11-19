@@ -128,3 +128,30 @@ BEGIN
         SET MESSAGE_TEXT = 'Invalid room availability or date range';
     END IF;
 END;
+---------------------------------
+INSERT INTO room (roomType, description, pricePerNight) VALUES
+('simple', 'Chambre simple confortable avec lit double et salle de bains privée.', 50.00),
+('simple', 'Chambre simple avec vue sur le jardin, lit simple et salle de bains.', 45.00),
+('simple', 'Chambre simple standard avec lit simple et commodités de base.', 40.00),
+('simple', 'Chambre simple confortable avec lit double et salle de bains privée.', 50.00),
+('simple', 'Chambre simple avec vue sur le jardin, lit simple et salle de bains.', 45.00),
+('simple', 'Chambre simple standard avec lit simple et commodités de base.', 40.00),
+('simple', 'Chambre simple confortable avec lit double et salle de bains privée.', 50.00),
+('simple', 'Chambre simple avec vue sur le jardin, lit simple et salle de bains.', 45.00),
+('simple', 'Chambre simple standard avec lit simple et commodités de base.', 40.00),
+
+
+('double', 'Chambre double spacieuse avec lit queen-size et salle de bains privée.', 80.00),
+('double', 'Chambre double élégante avec lit king-size et balcon privé.', 90.00),
+('double', 'Chambre double avec deux lits simples et vue panoramique.', 75.00),
+('double', 'Chambre double spacieuse avec lit queen-size et salle de bains privée.', 80.00),
+('double', 'Chambre double élégante avec lit king-size et balcon privé.', 90.00),
+('double', 'Chambre double avec deux lits simples et vue panoramique.', 75.00),
+
+('Deluxe', 'Suite Deluxe luxueuse avec lit king-size, salon et baignoire spa.', 150.00),
+('Deluxe', 'Suite Deluxe avec vue sur la mer, lit queen-size et coin salon.', 140.00),
+('Deluxe', 'Suite Deluxe avec terrasse privée, lit king-size et vue imprenable.', 160.00),
+
+('suite royale', 'Suite Royale somptueuse avec chambre à coucher, salon et jacuzzi.', 250.00),
+('suite royale', 'Suite Royale avec vue panoramique, lit king-size et salle à manger privée.', 230.00),
+('suite royale', 'Suite Royale avec terrasse privée, lit queen-size et piscine privée.', 270.00);
