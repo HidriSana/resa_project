@@ -4,60 +4,23 @@ $pageTitle = "Connexion à mon compte";
 require_once('header.php');
 
 session_start();
+$loggingUser = new User();
+var_dump($_POST);
 if (isset($_POST['email']) && isset($_POST['password'])) {
 
     $email = test_input($_POST['email']);
     $password = test_input($_POST['password']);
 
-    if (empty($email)) {
-
-        header("Location: index.php?error=Email required");
-
-        exit();
-    } else if (empty($pass)) {
-
-        header("Location: index.php?error=Password required");
-
-        exit();
+    $auth = $loggingUser->check_login($email, $password);
+    var_dump($auth);
+    if (!$auth) {
+        $_SESSION['message'] = 'Invalid email or password';
+        header('location:index.php');
     } else {
-
-        $sql = "SELECT * FROM users WHERE user_name='$uname' AND password='$pass'";
-
-        $result = mysqli_query($conn, $sql);
-
-        if (mysqli_num_rows($result) === 1) {
-
-            $row = mysqli_fetch_assoc($result);
-
-            if ($row['user_name'] === $uname && $row['password'] === $pass) {
-
-                echo "Logged in!";
-
-                $_SESSION['user_name'] = $row['user_name'];
-
-                $_SESSION['name'] = $row['name'];
-
-                $_SESSION['id'] = $row['id'];
-
-                header("Location: home.php");
-
-                exit();
-            } else {
-
-                header("Location: index.php?error=Incorect User name or password");
-
-                exit();
-            }
-        } else {
-
-            header("Location: index.php?error=Incorect User name or password");
-
-            exit();
-        }
+        $_SESSION['email'] = $auth;
+        header('location:home.php');
     }
 } else {
-
-    header("Location: index.php");
-
-    exit();
+    $_SESSION['message'] = 'You need to login first';
+    header('location:index.php');
 }

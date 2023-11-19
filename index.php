@@ -22,18 +22,28 @@ require_once('header.php');
                 <div class="panel-body">
                     <form method="POST" action="login.php">
                         <div class="form-group">
-                            <label for="username">Email:</label>
-                            <input class="form-control" placeholder="Username" type="text" name="username" autofocus required>
+                            <label for="email">Email:</label>
+                            <input class="form-control" placeholder="Email" type="email" name="email" autofocus required>
                         </div>
                         <div class="form-group">
                             <label for="password">Mot de passe:</label>
-                            <input class="form-control" placeholder="Password" type="password" name="password" required>
+                            <input class="form-control" placeholder="Mot de passe" type="password" name="password" required>
                         </div>
                         <button type="submit" name="login" class="btn btn-lg btn-primary btn-block"><span class="glyphicon glyphicon-log-in"></span> Se connecter</button>
                     </form>
+                    <?php
+                    if (isset($_SESSION['message'])) {
+                    ?>
+                        <div class="alert alert-info text-center">
+                            <?php echo $_SESSION['message']; ?>
+                        </div>
+                    <?php
+                        unset($_SESSION['message']);
+                    }
+                    ?>
                 </div>
-                <p><a href="#">Mot de passe oublié?</a><span class="text-muted">(Upcoming fonctionnality)</span></p>
             </div>
+            <p><a href="#">Mot de passe oublié?</a><span class="text-muted">(Upcoming fonctionnality)</span></p>
         </div>
 
         <!-- Formulaire d'inscription -->
@@ -76,8 +86,21 @@ require_once('header.php');
 
                         <button type="submit" class="btn btn-lg btn-primary btn-block">Créer mon compte</button>
                     </form>
+                    <?php
+                    if (isset($_SESSION['message'])) {
+                    ?>
+                        <div class="alert alert-info text-center">
+                            <?php echo $_SESSION['message']; ?>
+                        </div>
+                    <?php
+                        unset($_SESSION['message']);
+                    }
+                    ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<?php require_once('footer.php'); ?>
+<?php var_dump($_SESSION); ?>

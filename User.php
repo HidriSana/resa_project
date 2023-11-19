@@ -23,30 +23,33 @@ class User extends DbConnection
     public function check_login($email, $password)
     {
 
-        $statement = $this->connection->prepare("SELECT * FROM user WHERE email = :email AND password = :password");
+        $statement = $this->connection->prepare("SELECT id, password FROM user WHERE email = :email");
         $statement->bindParam(':email', $email, PDO::PARAM_STR);
-        $statement->bindParam(':password', $password, PDO::PARAM_STR);
         $statement->execute();
 
         if ($statement->rowCount() > 0) {
             $row = $statement->fetch(PDO::FETCH_ASSOC);
-            return $row['id'];
-        } else {
+            $hashedPasswordFromDB = $row['password'];
+
+            // Vérification du mot de passe haché
+            if (password_verify($password, $hashedPasswordFromDB)) {
+                return $row['id'];
+            }
             return false;
         }
     }
 
-    /*public function getUserById($id)
+    public function getUserDetails($userId)
     {
         $statement = $this->connection->prepare("SELECT * FROM user WHERE id = :id");
-        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->bindParam(':id', $userId, PDO::PARAM_INT);
         $statement->execute();
-        $userData = $statement->fetch(PDO::FETCH_ASSOC);
 
-        if (!$userData) {
-            return null;
+        if ($statement->rowCount() > 0) {
+            $row = $statement->fetch(PDO::FETCH_ASSOC);
+            return $row;
+        } else {
+            return false;
         }
-
-        return new self($userData['id'], $userData['username'], $userData['password']);
-    }*/
+    }
 }

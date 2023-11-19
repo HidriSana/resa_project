@@ -15,4 +15,3 @@
     <main>
         <?php
         require_once('files.php');
-        //Instanciation de la BDD
