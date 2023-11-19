@@ -19,4 +19,29 @@ class Room extends DbConnection
             return false;
         }
     }
+
+    public function getAvailableRooms($checkinDate, $checkoutDate)
+    {
+        //I'm making sure that only rooms that are not reserved on chosen dates are shown to the user. It checks user's entries but also if a reservation already exists on chosen dates
+        $query = "SELECT id
+        FROM room
+        WHERE id NOT IN (
+            SELECT DISTINCT room_id
+            FROM booking
+            WHERE :checkinDate BETWEEN checkinDate AND checkoutDate
+               OR :checkoutDate BETWEEN checkinDate AND checkoutDate
+               OR checkinDate BETWEEN :checkinDate AND :checkoutDate
+               OR checkoutDate BETWEEN :checkinDate AND :checkoutDate
+        );";
+
+        $statement = $this->connection->prepare($query);
+        $statement->bindParam(':checkinDate', $checkinDate, PDO::PARAM_STR);
+        $statement->bindParam(':checkoutDate', $checkoutDate, PDO::PARAM_STR);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
 }

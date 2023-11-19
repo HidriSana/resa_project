@@ -24,13 +24,11 @@ $userDetails = $loggedUser->getUserDetails($_SESSION['email']);
         </div>
     </div>
 </div>
-<?php
-require_once('footer.php');
-?>
+
 <div class="container mt-4">
 
     <h2>Réservation de Chambre d'Hôtel</h2>
-    <form>
+    <form action="" method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputTypeChambre">Type de Chambre</label>
@@ -53,7 +51,32 @@ require_once('footer.php');
                 <input type="date" class="form-control" id="checkoutDate">
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Réserver</button>
+        <button type="submit" class="btn btn-primary">Filtrer</button>
     </form>
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $allRooms = new Room;
 
+        $checkinDate = date('Y-m-d', strtotime($_POST['checkinDate']));
+        $checkoutDate = date('Y-m-d', strtotime($_POST['checkoutDate']));
+
+        $availableRooms = $allRooms->getAvailableRooms($checkinDate, $checkoutDate);
+        var_dump($checkinDate);
+        if ($availableRooms) {
+            echo '<h3>Chambres Disponibles :</h3>';
+            echo '<ul>';
+            foreach ($availableRooms as $room) {
+                echo '<li>' . $room['id'] . '</li>';
+            }
+            echo '</ul>';
+        } else {
+            echo '<p>Aucune chambre disponible pour les dates spécifiées.</p>';
+        }
+    }
+    ?>
 </div>
+
+
+<?php
+require_once('footer.php');
+?>
