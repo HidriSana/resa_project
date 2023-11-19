@@ -87,28 +87,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `donkey_hotel`.`reservationOption_has_reservation`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `donkey_hotel`.`reservationOption_has_reservation` (
-  `reservationOption_id` INT NOT NULL,
-  `reservation_id` INT NOT NULL,
-  PRIMARY KEY (`reservationOption_id`, `reservation_id`),
-  INDEX `fk_reservationOption_has_reservation_reservation1_idx` (`reservation_id` ASC) VISIBLE,
-  INDEX `fk_reservationOption_has_reservation_reservationOption1_idx` (`reservationOption_id` ASC) VISIBLE,
-  CONSTRAINT `fk_reservationOption_has_reservation_reservationOption1`
-    FOREIGN KEY (`reservationOption_id`)
-    REFERENCES `donkey_hotel`.`reservationOption` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_reservationOption_has_reservation_reservation1`
-    FOREIGN KEY (`reservation_id`)
-    REFERENCES `donkey_hotel`.`reservation` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -------------------------------------------------------------------------------
 --trigger
 CREATE TRIGGER before_booking_insert_update
@@ -155,3 +134,4 @@ INSERT INTO room (roomType, description, pricePerNight) VALUES
 ('suite royale', 'Suite Royale somptueuse avec chambre à coucher, salon et jacuzzi.', 250.00),
 ('suite royale', 'Suite Royale avec vue panoramique, lit king-size et salle à manger privée.', 230.00),
 ('suite royale', 'Suite Royale avec terrasse privée, lit queen-size et piscine privée.', 270.00);
+

@@ -13,7 +13,7 @@ require_once('header.php');
 
 <div class="container">
     <div class="row">
-        <!-- Formulaire de connexion -->
+
         <div class="col-md-6">
             <div class="login-panel panel panel-primary">
                 <div class="panel-heading">
@@ -46,7 +46,7 @@ require_once('header.php');
             <p><a href="#">Mot de passe oublié?</a><span class="text-muted">(Upcoming fonctionnality)</span></p>
         </div>
 
-        <!-- Formulaire d'inscription -->
+
         <div class="col-md-6">
             <div class="login-panel panel panel-primary">
                 <div class="panel-heading">
@@ -103,4 +103,5 @@ require_once('header.php');
 </div>
 
 <?php require_once('footer.php'); ?>
-<?php var_dump($_SESSION); ?>
+<?php //var_dump($_SESSION); 
+?>

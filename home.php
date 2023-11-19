@@ -3,16 +3,17 @@ $pageTitle = "Bienvenue chez Donkey Hotel";
 require_once('header.php');
 
 session_start();
-//return to login if not logged in
-/*if (!isset($_SESSION['user']) || (trim($_SESSION['user']) == '')) {
+//return to login/register if not logged in
+if (!isset($_SESSION['email']) || (trim($_SESSION['email']) == '')) {
     header('location:index.php');
-}*/
+}
 $loggedUser = new User();
 
 //var_dump($_SESSION);
 
 
 $userDetails = $loggedUser->getUserDetails($_SESSION['email']);
+
 //var_dump($userDetails);
 ?>
 <div class="container">
@@ -51,31 +52,28 @@ $userDetails = $loggedUser->getUserDetails($_SESSION['email']);
                 <input type="date" class="form-control" id="checkoutDate">
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Filtrer</button>
+        <button type="submit" class="btn btn-primary" name="filter">Filtrer</button>
     </form>
     <?php
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $allRooms = new Room;
 
-        $checkinDate = date('Y-m-d', strtotime($_POST['checkinDate']));
-        $checkoutDate = date('Y-m-d', strtotime($_POST['checkoutDate']));
+    $allRooms = new Room;
 
-        $availableRooms = $allRooms->getAvailableRooms($checkinDate, $checkoutDate);
-        var_dump($checkinDate);
-        if ($availableRooms) {
-            echo '<h3>Chambres Disponibles :</h3>';
-            echo '<ul>';
-            foreach ($availableRooms as $room) {
-                echo '<li>' . $room['id'] . '</li>';
-            }
-            echo '</ul>';
-        } else {
-            echo '<p>Aucune chambre disponible pour les dates spécifiées.</p>';
+    $checkinDate = isset($_POST['checkinDate']) ? date('Y-m-d', strtotime($_POST['checkinDate'])) : null;
+    $checkoutDate = isset($_POST['checkoutDate']) ? date('Y-m-d', strtotime($_POST['checkoutDate'])) : null;
+
+    $availableRooms = $allRooms->getAvailableRooms($checkinDate, $checkoutDate);
+    var_dump($checkinDate);
+    if ($availableRooms) {
+        echo '<h3>Chambres Disponibles :</h3>';
+        foreach ($availableRooms as $room) {
+            echo $room['id'] .  ' ' . $room['description'] . '</br>';
         }
+    } else {
+        echo '<p>Aucune chambre disponible pour les dates spécifiées.</p>';
     }
+
     ?>
 </div>
-
 
 <?php
 require_once('footer.php');

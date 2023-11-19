@@ -23,7 +23,7 @@ class Room extends DbConnection
     public function getAvailableRooms($checkinDate, $checkoutDate)
     {
         //I'm making sure that only rooms that are not reserved on chosen dates are shown to the user. It checks user's entries but also if a reservation already exists on chosen dates
-        $query = "SELECT id
+        $query = "SELECT *
         FROM room
         WHERE id NOT IN (
             SELECT DISTINCT room_id
