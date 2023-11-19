@@ -3,9 +3,8 @@
 $pageTitle = "Handling";
 require_once('header.php');
 
-$userHandler = new User($pdo);
+$userHandler = new User();
 
-var_dump($userHandler);
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $lastname = $_POST["lastname"];
     $firstname = $_POST["firstname"];
@@ -14,4 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = $_POST["password"];
 
     $userHandler->createUser($lastname, $firstname, $phone, $email, $password);
+    echo '<p>
+    Votre compte a été créé avec succès. Veuillez <a href="login.php">vous connecter</a> pour pouvoir voir et réserver nos chambres disponibles.</p>';
 }

@@ -109,3 +109,22 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-------------------------------------------------------------------------------
+--trigger
+CREATE TRIGGER before_booking_insert_update
+BEFORE INSERT OR UPDATE ON `donkey_hotel`.`booking`
+FOR EACH ROW
+BEGIN
+    DECLARE roomIsReserved INT;
+
+    SELECT `isReserved` INTO roomIsReserved
+    FROM `donkey_hotel`.`room`
+    WHERE `id` = NEW.`room_id`;
+
+    IF roomIsReserved = 0 AND DATEDIFF(NEW.`checkoutDate`, NEW.`checkinDate`) > 0 THEN
+        -- Everything is fine, do nothing
+    ELSE
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Invalid room availability or date range';
+    END IF;
+END;
