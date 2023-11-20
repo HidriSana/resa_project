@@ -1,7 +1,7 @@
 <?php
 
-$pageTitle = "Connexion à mon compte";
-require_once('header.php');
+//$pageTitle = "Connexion à mon compte";
+ob_start();
 
 session_start();
 $loggingUser = new User();
@@ -26,4 +26,5 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 }
 
 
-require_once('footer.php');
+$content = ob_get_clean();
+include 'template.php';
