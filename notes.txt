@@ -1,0 +1,50 @@
+                         Random notes
+
+La manipultion d'un chariot est plus une manipulation de tableau que de la BDD . 
+
+Le cart récupère un ID de produit +  la quantité. 
+
+L'ajout d'un produit se fait avec un array_push
+Le vider se fait avec un unset. 
+Tout est une récupération en session. 
+Penser à vérifier l'authentification dans le header: 
+    Le mieux est d"utiliser isset($_SESSION['email']) plutot que d'utiliser un empty  car plus précis et vérifie bien que la      valeur n'est pas nulle. 
+    En if isset, 
+    sinon afficher se connecgter /s'inscrire
+------------------------------------------------------------
+                                               Réservation + CART
+1-Gestion des réservations en guest-> démarre une session sans authentification --> Proposition de connexion/inscription en header
+2-Gestion total: Fonction de calcul toute simple -> Doit pouvoir être insérée une fois la réservation est insérée dans la 
+table 
+3-Authentification/inscription à quel moment ? 
+    L'utilisateur  va visualiser son panier
+    Bouton valider ma/mes réservations - La réservation ici a toujours un statut pending  et n'est pas encore stockée dans la BDD 
+    Une demande d'inscription ou de connexion est demandée +++++ retour à la page de validation 
+    Validation  ≠ Paiement ( pas pour le moment) = INSERTION dans la BDD  avec  statut : "En attente"
+    Cette Réservation est à présent  visualisable dans l'espace client: récupération par l'ID du user authentifié
+        a.Elle peut alors être payée :  et changer de statut " Confirmée"
+        b.Scénarios annulation : 
+            -Elle peut être annulée: et changer de statut " Annulée". 
+            -Elle est également annulée si elle ne prend pas le statut "confirmée" 7 jours avant le checkinDate . 
+                PS: Penser à mettre un message à l"utilistaeur lors de l'insertion de la réservation dans la BDD en statut "en attente" . 
+        c. Happy Scénario: Prend le statut "Terminée" uniquement si la réservation est passée en "Confirmée" et que la date   du checkin est passée. 
+------------------------------------------------------------------------------------------------------------------------------
+1- Le client  arrive sur la page  d'accueil:
+    Header: Logo + nom de l'établissement + login/inscription . 
+        Si authentifié : Logo + nom de l'établissement  +Déconnexion  +  Mes réservations apparaissent
+    Hero : Background image +  Bienvenue chez Donkey Hotel
+    Bande de réservation : checkinDate, checkoutDate, nombre d'adultes ou d'enfants +  barre de rechercher(Filtre)
+    Affichage de toutes les chambres  si pas de filtre sous forme de cartes en alignement de 3 sur DESKTOP+ photos+ bouton détails et réserver
+        Le détail devrait pouvoir afficher la photo de chambre en grand, et la description en fenêtre modale en JS si possible (à voir si le temps le permet)
+2- une fois une chambre sélectionnée : des options peuvent alors être choisies. SIi celles-ci sont choisies, bouton (Valider sans options) , devient valider avec ces options      -> Fait passer la réservation dans un panier 
+3- Le Panier est une bande à droite , qui n'est visible que si le visiteur/client choisit une  réservation( sur desktop du moins) . Voir , si le temps le permet, si je peux le faire  en hidden en responsive avec un bouton qui peut le faire apparaitre
+
+---------------------------------------------------------------------------------------------
+Liste des fichier/pages à créer:
+- template.php ; header + footer
+-index.php 
+-login.php
+-handle-login.php
+-
+
+
