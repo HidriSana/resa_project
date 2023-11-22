@@ -3,7 +3,6 @@ require_once('DbConnection.php');
 
 class User extends DbConnection
 {
-
     public function createUser($lastname, $firstname, $phone, $email, $password)
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
