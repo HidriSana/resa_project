@@ -9,15 +9,13 @@ class User extends DbConnection
         parent::__construct();
     }
 
-    public function createBooking($checkinDate, $checkoutDate, $totalPrice, $bookingStatus)
+    public function createBooking($checkinDate, $checkoutDate, $bookingStatus)
     {
-        $statement = $this->connection->prepare("INSERT INTO user (checkinDate, checkoutDate, totalPrice, bookingStatus) VALUES (:lastname,:firstname,:phone,:email,:password)");
+        $statement = $this->connection->prepare("INSERT INTO user (checkinDate, checkoutDate) VALUES (:checkinDate,:checkoutDate)");
 
-        $statement->bindParam(':lastname', $lastname, PDO::PARAM_STR);
-        $statement->bindParam(':firstname', $firstname, PDO::PARAM_STR);
-        $statement->bindParam(':phone', $phone, PDO::PARAM_INT);
-        $statement->bindParam(':email', $email, PDO::PARAM_STR);
-        $statement->bindParam(':password', $hashedPassword, PDO::PARAM_STR);
+        $statement->bindParam(':checkingDate', $checkinDate, PDO::PARAM_STR);
+        $statement->bindParam(':checkoutDate', $checkoutDate, PDO::PARAM_STR);
+
         $statement->execute();
     }
 }

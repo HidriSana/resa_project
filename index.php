@@ -44,7 +44,7 @@ require_once('files.php');
                     <div class="card-body">
                         <h5 class="card-title"><?= $room['description']; ?></h5>
                         <p class="card-text">Prix par nuit : <?= $room['pricePerNight']; ?></p>
-                        <a href="addcart.php?identifiant=<?= $room['id'] ?>" class="btn btn-primary">Réserver</a>
+                        <a href="addcart.php?id=<?= $room['id'] ?>" class="btn btn-primary">Réserver</a>
                     </div>
                 </div>
             </div>
