@@ -1,6 +1,6 @@
 <?php
 ob_start();
-
+require_once('files.php');
 ?>
 <div class="col-md-6">
     <div class="login-panel panel panel-primary">

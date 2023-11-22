@@ -1,9 +1,10 @@
 <?php
+require_once('files.php');
 
 $pageTitle = "Connexion à mon compte";
-ob_start();
 
 session_start();
+
 $loggingUser = new User();
 
 if (isset($_POST['email']) && isset($_POST['password'])) {

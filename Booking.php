@@ -1,7 +1,7 @@
 <?php
 require_once('DbConnection.php');
 
-class User extends DbConnection
+class Booking extends DbConnection
 {
     public function __construct()
     {

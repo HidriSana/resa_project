@@ -1,10 +1,12 @@
 <?php
 //start session
 ob_start();
+require_once('files.php');
+
 
 //redirect if logged in
 if (isset($_SESSION['user'])) {
-    header('location:home.php');
+    header('location:index.php');
 }
 ?>
 
@@ -15,7 +17,7 @@ if (isset($_SESSION['user'])) {
                 <h3 class="panel-title">Connexion à mon compte</h3>
             </div>
             <div class="panel-body">
-                <form method="POST" action="login.php">
+                <form method="POST" action="handle-login.php">
                     <div class="form-group">
                         <label for="email">Email:</label>
                         <input class="form-control" placeholder="Email" type="email" name="email" autofocus required>

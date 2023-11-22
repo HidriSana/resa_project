@@ -1,7 +1,7 @@
 <?php
-
+ob_start();
 $pageTitle = "Handling";
-require_once('header.php');
+require_once('files.php');
 
 $userHandler = new User();
 
@@ -16,3 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     echo '<p>
     Votre compte a été créé avec succès. Veuillez <a href="login.php">vous connecter</a> pour pouvoir voir et réserver nos chambres disponibles.</p>';
 }
+
+$content = ob_get_clean();
+include 'template.php';
