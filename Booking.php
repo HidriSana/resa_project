@@ -3,11 +3,6 @@ require_once('DbConnection.php');
 
 class Booking extends DbConnection
 {
-    public function __construct()
-    {
-
-        parent::__construct();
-    }
 
     public function createBooking($checkinDate, $checkoutDate, $bookingStatus)
     {

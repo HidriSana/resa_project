@@ -3,11 +3,7 @@ require_once('DbConnection.php');
 
 class Room extends DbConnection
 {
-    public function __construct()
-    {
 
-        parent::__construct();
-    }
 
     public function getAllRooms()
     {
